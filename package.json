@@ -1,22 +1,22 @@
 {
   "name": "rpc-builder",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Transport and format agnostic RPC library for browser and Node.js",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "nodeunit test.js"
+    "test": "nodeunit test/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "kurento/kws-rpc-builder"
+    "url": "piranna/rpc-builder"
   },
   "keywords": [
     "RPC",
     "JsonRPC",
     "XML-RPC",
     "HTTP",
-    "WebSocket",
-    "Kurento"
+    "WebP2P",
+    "WebSocket"
   ],
   "author": "Kurento <info@kurento.org> (http://www.kurento.org/)",
   "contributors": [
@@ -25,5 +25,8 @@
   "license": "LGPL",
   "devDependencies": {
     "nodeunit": "~0.8.6"
+  },
+  "dependencies": {
+    "inherits": "^2.0.1"
   }
 }
