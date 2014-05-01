@@ -215,5 +215,81 @@ exports['encode JsonRPC 2.0'] =
     test.equal(response, undefined);
 
     test.done();
+  },
+
+  'reply with transport': function(test)
+  {
+    test.expect(4);
+
+    var self = this;
+
+    var value = {'asdf': 'qwert'};
+
+    var request = this.rpcBuilder.encode(METHOD, function(error, result)
+    {
+      test.deepEqual(result, value);
+    });
+
+    // Response request
+    request = this.rpcBuilder.decode(request);
+
+    var response = request.reply(null, value, function(message)
+    {
+      // Test response message
+      test.deepEqual(JSON.parse(message),
+      {
+        jsonrpc: '2.0',
+        result: value,
+        id: 0
+      });
+
+      message = self.rpcBuilder.decode(message);
+
+      // Test response as processed
+      test.equal(message, undefined);
+    });
+
+    // Test response as send by reply transport
+    test.equal(response, undefined);
+
+    test.done();
+  },
+
+  'decode with transport': function(test)
+  {
+    test.expect(4);
+
+    var self = this;
+
+    var value = {'asdf': 'qwert'};
+
+    var request = this.rpcBuilder.encode(METHOD, function(error, result)
+    {
+      test.deepEqual(result, value);
+    });
+
+    // Response request
+    request = this.rpcBuilder.decode(request, function(message)
+    {
+      // Test response message
+      test.deepEqual(JSON.parse(message),
+      {
+        jsonrpc: '2.0',
+        result: value,
+        id: 0
+      });
+
+      message = self.rpcBuilder.decode(message);
+
+      // Test response as processed
+      test.equal(message, undefined);
+    });
+
+    var response = request.reply(null, value);
+
+    // Test response as send by reply transport
+    test.equal(response, undefined);
+
+    test.done();
   }
 };
