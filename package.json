@@ -27,6 +27,6 @@
     "nodeunit": "~0.8.6"
   },
   "dependencies": {
-    "inherits": "^2.0.1"
+    "inherits": "~2.0.1"
   }
 }
