@@ -98,6 +98,44 @@ exports['encode JsonRPC 2.0'] =
     });
   },
 
+  'request timeout and retry': function(test)
+  {
+    var self = this;
+
+    test.expect(4);
+
+    var gotError = false;
+
+    var request = this.rpcBuilder.encode(METHOD, function(error, result)
+    {
+      if(!gotError)
+      {
+        gotError = true;
+
+        test.notEqual(error, undefined);
+        test.deepEqual(error.request, request);
+
+        var request2 = error.retry();
+
+        test.deepEqual(request2, request);
+
+        // Process request on 'server'
+        request2 = self.rpcBuilder.decode(request2);
+        var response = request2.reply();
+
+        // Process response by 'client'
+        self.rpcBuilder.decode(response);
+      }
+
+      else
+      {
+        test.equal(error, undefined);
+
+        test.done();
+      }
+    });
+  },
+
   'cancel request': function(test)
   {
     test.expect(0);
