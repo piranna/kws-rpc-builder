@@ -223,6 +223,34 @@ exports['encode JsonRPC 2.0'] =
     test.done();
   },
 
+  'duplicate response': function(test)
+  {
+    test.expect(3);
+
+    var request = this.rpcBuilder.encode(METHOD, function(error, result)
+    {
+      test.equal(result, null);
+    });
+
+    // Compose response manually from the request
+    var response = JSON.parse(request);
+
+    delete response.method;
+    response.result = null;
+
+    response = JSON.stringify(response);
+
+    // Test response
+    var result = this.rpcBuilder.decode(response);
+    test.equal(result, undefined);
+
+    // Ignored response
+    var result = this.rpcBuilder.decode(response);
+    test.equal(result, undefined);
+
+    test.done();
+  },
+
   'request reply response': function(test)
   {
     test.expect(3);
