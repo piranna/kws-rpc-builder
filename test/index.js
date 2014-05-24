@@ -35,6 +35,13 @@ exports['encode JsonRPC 2.0'] =
     callback();
   },
 
+  tearDown: function(callback)
+  {
+    this.rpcBuilder.close();
+
+    callback();
+  },
+
 
   'notification': function(test)
   {
