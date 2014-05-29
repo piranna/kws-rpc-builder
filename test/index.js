@@ -182,6 +182,27 @@ exports['encode JsonRPC 2.0'] =
     test.done();
   },
 
+  'duplicated request with transport': function(test)
+  {
+    test.expect(2);
+
+    var request = this.rpcBuilder.encode(METHOD, noop);
+
+    // Test request
+    var request1 = this.rpcBuilder.decode(request);
+    test.equal(request1.duplicated, false);
+
+    var reply1 = request1.reply(null, null);
+
+    var request2 = this.rpcBuilder.decode(request, function(reply2)
+    {
+      test.deepEqual(reply1, reply2);
+
+      test.done();
+    });
+    test.equal(request2, undefined);
+  },
+
   'override duplicated request': function(test)
   {
     test.expect(4);
