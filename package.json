@@ -1,7 +1,7 @@
 {
   "name": "rpc-builder",
   "version": "0.1.2",
-  "description": "Transport and format agnostic RPC library for browser and Node.js",
+  "description": "Transport and protocol agnostic RPC library for browser and Node.js",
   "main": "lib/index.js",
   "scripts": {
     "test": "nodeunit test/index.js"
@@ -16,15 +16,18 @@
     "XML-RPC",
     "HTTP",
     "WebP2P",
-    "WebSocket"
+    "WebSocket",
+    "DataChannel",
+    "WebWorker"
   ],
   "author": "Kurento <info@kurento.org> (http://www.kurento.org/)",
   "contributors": [
-    "Jesús Leganés Combarro \"piranna\" <piranna@gmail.com>"
+    "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>"
   ],
   "license": "LGPL",
   "devDependencies": {
-    "nodeunit": "~0.8.6"
+    "eventtarget": "0.0.1",
+    "nodeunit": "~0.9.0"
   },
   "dependencies": {
     "inherits": "~2.0.1"
